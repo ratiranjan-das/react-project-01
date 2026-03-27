@@ -33,41 +33,55 @@ const skills = [
   { name: 'Claude AI',    logo: `${SI}/anthropic/191919` },
 ]
 
+const UNSPLASH = 'https://images.unsplash.com'
+
 const projects = [
   {
     title: 'Portfolio Site',
-    desc: 'A personal portfolio built with React & Vite showcasing projects and skills.',
+    category: 'Personal Project',
+    desc: 'A personal portfolio built with React & Vite showcasing projects, skills and contact info with dark/light mode support.',
     tags: ['React', 'Vite', 'CSS'],
+    preview: `${UNSPLASH}/photo-1507238691740-187a5b1d37b8?w=600&q=80`,
     comingSoon: false,
   },
   {
     title: 'UI Component Library',
-    desc: 'A reusable collection of accessible React components with zero dependencies.',
+    category: 'Open Source',
+    desc: 'A reusable collection of accessible React components with zero dependencies, built for scalability and design consistency.',
     tags: ['React', 'TypeScript', 'Storybook'],
+    preview: `${UNSPLASH}/photo-1555066931-4365d14bab8c?w=600&q=80`,
     comingSoon: false,
   },
   {
     title: 'Grid UI',
-    desc: 'A responsive grid layout system with drag-to-resize panels and customizable widget components.',
+    category: 'Frontend Tool',
+    desc: 'A responsive grid layout system with drag-to-resize panels and customizable widget components for dashboard use cases.',
     tags: ['React', 'CSS Grid', 'TypeScript'],
+    preview: `${UNSPLASH}/photo-1551288049-bebda4e38f71?w=600&q=80`,
     comingSoon: false,
   },
   {
     title: 'LeetCode Clone',
-    desc: 'A LeetCode-inspired platform with a special AI-powered hints feature and real-time code execution.',
+    category: 'AI-Powered Platform',
+    desc: 'A LeetCode-inspired platform with a special AI-powered hints feature and real-time code execution environment.',
     tags: ['Next.js', 'TypeScript', 'Claude AI'],
+    preview: `${UNSPLASH}/photo-1515879218367-8466d910aaa4?w=600&q=80`,
     comingSoon: true,
   },
   {
     title: 'V0 Clone',
-    desc: 'An AI-driven UI component generator that turns prompts into production-ready React components.',
+    category: 'AI UI Generator',
+    desc: 'An AI-driven UI component generator that turns natural language prompts into production-ready React components instantly.',
     tags: ['React', 'Claude AI', 'Tailwind'],
+    preview: `${UNSPLASH}/photo-1677442135703-1787eea5ce01?w=600&q=80`,
     comingSoon: true,
   },
   {
     title: 'Kanban View',
-    desc: 'A drag-and-drop Kanban board for task management with real-time collaboration support.',
+    category: 'Productivity Tool',
+    desc: 'A drag-and-drop Kanban board for task management with real-time collaboration support and customizable workflows.',
     tags: ['React', 'Redux', 'RTK Query'],
+    preview: `${UNSPLASH}/photo-1611224923853-80b023f02d71?w=600&q=80`,
     comingSoon: true,
   },
 ]
@@ -178,24 +192,47 @@ export default function App() {
         <section className="section projects-section" id="projects">
           <div className="section-label">What I've built</div>
           <h2 className="section-title">Featured Projects</h2>
-          <div className="projects-grid">
-            {projects.map((p) => (
-              <div key={p.title} className={`project-card ${p.comingSoon ? 'project-card--soon' : ''}`}>
-                <div className="project-card-top" />
-                <div className="project-card-body">
-                  <div className="project-card-header">
-                    <h3 className="project-title">{p.title}</h3>
-                    {p.comingSoon && <span className="coming-soon-badge">Coming Soon</span>}
+
+          <div className="timeline">
+            <div className="timeline-line" />
+            {projects.map((p, i) => {
+              const isLeft = i % 2 === 0
+              return (
+                <div key={p.title} className={`timeline-item ${isLeft ? 'timeline-item--left' : 'timeline-item--right'} ${p.comingSoon ? 'timeline-item--soon' : ''}`}>
+
+                  {/* Text card */}
+                  <div className="timeline-card">
+                    <div className="timeline-card-header">
+                      <span className="timeline-category">{p.category}</span>
+                      {p.comingSoon && <span className="coming-soon-badge">Coming Soon</span>}
+                    </div>
+                    <h3 className="timeline-title">{p.title}</h3>
+                    <p className="timeline-desc">{p.desc}</p>
+                    <div className="project-tags">
+                      {p.tags.map((t) => (
+                        <span key={t} className="tag">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                  <p className="project-desc">{p.desc}</p>
-                  <div className="project-tags">
-                    {p.tags.map((t) => (
-                      <span key={t} className="tag">{t}</span>
-                    ))}
+
+                  {/* Center dot */}
+                  <div className="timeline-dot">
+                    <div className="timeline-dot-inner" />
                   </div>
+
+                  {/* Preview image */}
+                  <div className="timeline-preview">
+                    <div className="timeline-preview-browser">
+                      <div className="browser-bar">
+                        <span /><span /><span />
+                      </div>
+                      <img src={p.preview} alt={p.title} className="browser-img" />
+                    </div>
+                  </div>
+
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
 
