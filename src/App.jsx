@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react'
-import heroImg from './assets/hero.png'
+import profileImg from './assets/profile.png'
 import './App.css'
 
 const SI = 'https://cdn.simpleicons.org'
+
+const contact = {
+  github:       { href: 'https://github.com/ratiranjan-das',          label: 'GitHub',    sub: '@ratiranjan-das' },
+  linkedin:     { href: 'https://www.linkedin.com/in/ratiranjan-das-4b14041ab/', label: 'LinkedIn',  sub: 'Ratiranjan Das' },
+  whatsapp:     { href: 'https://wa.me/916370295447',                 label: 'WhatsApp',  sub: '+91 63702 95447' },
+  email:        { href: 'mailto:dasratiranjan65@gmail.com',           label: 'Email',     sub: 'dasratiranjan65@gmail.com' },
+  resume:       { href: '/Das_Resume.pdf' },
+}
 
 const skills = [
   { name: 'React',        logo: `${SI}/react/61DAFB` },
@@ -30,16 +38,37 @@ const projects = [
     title: 'Portfolio Site',
     desc: 'A personal portfolio built with React & Vite showcasing projects and skills.',
     tags: ['React', 'Vite', 'CSS'],
+    comingSoon: false,
   },
   {
     title: 'UI Component Library',
     desc: 'A reusable collection of accessible React components with zero dependencies.',
     tags: ['React', 'TypeScript', 'Storybook'],
+    comingSoon: false,
   },
   {
-    title: 'Dev Blog',
-    desc: 'A markdown-powered blog covering web development tips and tutorials.',
-    tags: ['Next.js', 'MDX', 'Tailwind'],
+    title: 'Grid UI',
+    desc: 'A responsive grid layout system with drag-to-resize panels and customizable widget components.',
+    tags: ['React', 'CSS Grid', 'TypeScript'],
+    comingSoon: false,
+  },
+  {
+    title: 'LeetCode Clone',
+    desc: 'A LeetCode-inspired platform with a special AI-powered hints feature and real-time code execution.',
+    tags: ['Next.js', 'TypeScript', 'Claude AI'],
+    comingSoon: true,
+  },
+  {
+    title: 'V0 Clone',
+    desc: 'An AI-driven UI component generator that turns prompts into production-ready React components.',
+    tags: ['React', 'Claude AI', 'Tailwind'],
+    comingSoon: true,
+  },
+  {
+    title: 'Kanban View',
+    desc: 'A drag-and-drop Kanban board for task management with real-time collaboration support.',
+    tags: ['React', 'Redux', 'RTK Query'],
+    comingSoon: true,
   },
 ]
 
@@ -103,10 +132,30 @@ export default function App() {
           </div>
           <div className="hero-avatar">
             <div className="avatar-ring">
-              <img src={heroImg} alt="Ratiranjan Das" className="avatar-img" />
+              <img src={profileImg} alt="Ratiranjan Das" className="avatar-img" />
             </div>
             <div className="avatar-badge react-badge">
-              <img src={`${SI}/react/61DAFB`} alt="React" />
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFA500" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <div className="hero-socials">
+              <a href={contact.github.href} target="_blank" rel="noreferrer" className="social-icon-btn" aria-label="GitHub">
+                <img src={`${SI}/github/181717`} alt="GitHub" />
+              </a>
+              <a href={contact.linkedin.href} target="_blank" rel="noreferrer" className="social-icon-btn" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href={contact.whatsapp.href} target="_blank" rel="noreferrer" className="social-icon-btn" aria-label="WhatsApp">
+                <img src={`${SI}/whatsapp/25D366`} alt="WhatsApp" />
+              </a>
+              <a href={contact.email.href} className="social-icon-btn" aria-label="Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+              </a>
             </div>
           </div>
         </section>
@@ -131,10 +180,13 @@ export default function App() {
           <h2 className="section-title">Featured Projects</h2>
           <div className="projects-grid">
             {projects.map((p) => (
-              <div key={p.title} className="project-card">
+              <div key={p.title} className={`project-card ${p.comingSoon ? 'project-card--soon' : ''}`}>
                 <div className="project-card-top" />
                 <div className="project-card-body">
-                  <h3 className="project-title">{p.title}</h3>
+                  <div className="project-card-header">
+                    <h3 className="project-title">{p.title}</h3>
+                    {p.comingSoon && <span className="coming-soon-badge">Coming Soon</span>}
+                  </div>
                   <p className="project-desc">{p.desc}</p>
                   <div className="project-tags">
                     {p.tags.map((t) => (
@@ -149,16 +201,82 @@ export default function App() {
 
         {/* ── Contact ────────────────────────────────── */}
         <section className="section contact-section" id="contact">
-          <div className="contact-card">
-            <div className="section-label">Let's talk</div>
-            <h2 className="section-title">Get In Touch</h2>
-            <p className="contact-sub">
-              Open to new opportunities, collaborations, or just a friendly chat
-              about web tech.
-            </p>
-            <a href="mailto:hello@ratiranjandas.dev" className="btn btn-primary">
-              Send a Message
+          <div className="section-label">Let's talk</div>
+          <h2 className="section-title">Get In Touch</h2>
+          <p className="contact-sub">
+            Open to new opportunities, collaborations, or just a friendly chat about web tech.
+          </p>
+
+          <div className="contact-grid">
+            {/* GitHub */}
+            <a href={contact.github.href} target="_blank" rel="noreferrer" className="contact-card">
+              <div className="contact-card-icon" style={{ background: 'rgba(24,23,23,0.08)' }}>
+                <img src={`${SI}/github/181717`} alt="GitHub" />
+              </div>
+              <div className="contact-card-info">
+                <span className="contact-card-label">{contact.github.label}</span>
+                <span className="contact-card-sub">{contact.github.sub}</span>
+              </div>
+              <svg className="contact-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17 17 7M7 7h10v10"/>
+              </svg>
             </a>
+
+            {/* LinkedIn */}
+            <a href={contact.linkedin.href} target="_blank" rel="noreferrer" className="contact-card">
+              <div className="contact-card-icon" style={{ background: 'rgba(10,102,194,0.1)' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#0A66C2">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </div>
+              <div className="contact-card-info">
+                <span className="contact-card-label">{contact.linkedin.label}</span>
+                <span className="contact-card-sub">{contact.linkedin.sub}</span>
+              </div>
+              <svg className="contact-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17 17 7M7 7h10v10"/>
+              </svg>
+            </a>
+
+            {/* WhatsApp */}
+            <a href={contact.whatsapp.href} target="_blank" rel="noreferrer" className="contact-card">
+              <div className="contact-card-icon" style={{ background: 'rgba(37,211,102,0.1)' }}>
+                <img src={`${SI}/whatsapp/25D366`} alt="WhatsApp" />
+              </div>
+              <div className="contact-card-info">
+                <span className="contact-card-label">{contact.whatsapp.label}</span>
+                <span className="contact-card-sub">{contact.whatsapp.sub}</span>
+              </div>
+              <svg className="contact-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17 17 7M7 7h10v10"/>
+              </svg>
+            </a>
+
+            {/* Email */}
+            <a href={contact.email.href} className="contact-card">
+              <div className="contact-card-icon" style={{ background: 'rgba(170,59,255,0.1)' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+              </div>
+              <div className="contact-card-info">
+                <span className="contact-card-label">{contact.email.label}</span>
+                <span className="contact-card-sub">{contact.email.sub}</span>
+              </div>
+              <svg className="contact-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17 17 7M7 7h10v10"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Resume */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <a href={contact.resume.href} download className="resume-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Resume
+          </a>
           </div>
         </section>
       </main>
