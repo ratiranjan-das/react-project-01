@@ -569,6 +569,10 @@
 /* ─── Timeline Preview ───────────────────────────────── */
 .timeline-preview {
   min-width: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .timeline-preview-browser {
