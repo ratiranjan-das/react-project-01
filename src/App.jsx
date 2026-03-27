@@ -1,26 +1,28 @@
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+const SI = 'https://cdn.simpleicons.org'
+
 const skills = [
-  { name: 'React', icon: reactLogo },
-  { name: 'Next.js', icon: null },
-  { name: 'TypeScript', icon: null },
-  { name: 'JavaScript', icon: null },
-  { name: 'HTML', icon: null },
-  { name: 'CSS', icon: null },
-  { name: 'Redux', icon: null },
-  { name: 'RTK Query', icon: null },
-  { name: 'Figma', icon: null },
-  { name: 'Git CLI', icon: null },
-  { name: 'GitHub', icon: null },
-  { name: 'Bitbucket', icon: null },
-  { name: 'JIRA', icon: null },
-  { name: 'Ant Design', icon: null },
-  { name: 'Material UI', icon: null },
-  { name: 'Tailwind', icon: null },
-  { name: 'SCSS', icon: null },
-  { name: 'Claude AI', icon: null },
+  { name: 'React',        logo: `${SI}/react/61DAFB` },
+  { name: 'Next.js',      logo: `${SI}/nextdotjs/000000` },
+  { name: 'TypeScript',   logo: `${SI}/typescript/3178C6` },
+  { name: 'JavaScript',   logo: `${SI}/javascript/F7DF1E` },
+  { name: 'HTML',         logo: `${SI}/html5/E34F26` },
+  { name: 'CSS',          logo: `${SI}/css/1572B6` },
+  { name: 'Redux',        logo: `${SI}/redux/764ABC` },
+  { name: 'RTK Query',    logo: `${SI}/redux/764ABC` },
+  { name: 'Figma',        logo: `${SI}/figma/F24E1E` },
+  { name: 'Git CLI',      logo: `${SI}/git/F05032` },
+  { name: 'GitHub',       logo: `${SI}/github/181717` },
+  { name: 'Bitbucket',    logo: `${SI}/bitbucket/0052CC` },
+  { name: 'JIRA',         logo: `${SI}/jira/0052CC` },
+  { name: 'Ant Design',   logo: `${SI}/antdesign/0170FE` },
+  { name: 'Material UI',  logo: `${SI}/mui/007FFF` },
+  { name: 'Tailwind',     logo: `${SI}/tailwindcss/06B6D4` },
+  { name: 'SCSS',         logo: `${SI}/sass/CC6699` },
+  { name: 'Claude AI',    logo: `${SI}/anthropic/191919` },
 ]
 
 const projects = [
@@ -42,17 +44,46 @@ const projects = [
 ]
 
 export default function App() {
+  const [dark, setDark] = useState(
+    () => window.matchMedia('(prefers-color-scheme: dark)').matches
+  )
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
+  }, [dark])
+
   return (
     <>
       {/* ── Navbar ─────────────────────────────────── */}
       <header className="navbar">
         <span className="navbar-logo">RD</span>
-        <nav className="navbar-links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div className="navbar-right">
+          <nav className="navbar-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <button
+            className="theme-toggle"
+            onClick={() => setDark((d) => !d)}
+            aria-label="Toggle dark mode"
+          >
+            {dark ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            )}
+          </button>
+        </div>
       </header>
 
       <main>
@@ -75,7 +106,7 @@ export default function App() {
               <img src={heroImg} alt="Ratiranjan Das" className="avatar-img" />
             </div>
             <div className="avatar-badge react-badge">
-              <img src={reactLogo} alt="React" />
+              <img src={`${SI}/react/61DAFB`} alt="React" />
             </div>
           </div>
         </section>
@@ -87,9 +118,7 @@ export default function App() {
           <div className="skills-grid">
             {skills.map((s) => (
               <div key={s.name} className="skill-card">
-                {s.icon
-                  ? <img src={s.icon} alt={s.name} className="skill-icon" />
-                  : <span className="skill-initial">{s.name[0]}</span>}
+                <img src={s.logo} alt={s.name} className="skill-icon" />
                 <span>{s.name}</span>
               </div>
             ))}
