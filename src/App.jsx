@@ -86,14 +86,32 @@ const projects = [
   },
 ]
 
+const FULL_NAME = 'Ratiranjan Das'
+
 export default function App() {
   const [dark, setDark] = useState(
     () => window.matchMedia('(prefers-color-scheme: dark)').matches
   )
+  const [displayName, setDisplayName] = useState('')
+  const [typing, setTyping] = useState(true)
+  const [done, setDone] = useState(false)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
+
+  useEffect(() => {
+    if (done) return
+    if (displayName.length < FULL_NAME.length) {
+      const t = setTimeout(() => {
+        setDisplayName(FULL_NAME.slice(0, displayName.length + 1))
+      }, 150)
+      return () => clearTimeout(t)
+    } else {
+      setTyping(false)
+      setDone(true)
+    }
+  }, [displayName, done])
 
   return (
     <>
@@ -134,7 +152,10 @@ export default function App() {
         <section className="hero-section" id="about">
           <div className="hero-text">
             <p className="hero-eyebrow">Hey there, I'm</p>
-            <h1 className="hero-name">Ratiranjan Das</h1>
+            <h1 className="hero-name">
+              {displayName}
+              {!done && <span className="cursor">|</span>}
+            </h1>
             <p className="hero-tagline">
               Frontend Developer crafting fast, beautiful web experiences with
               React &amp; modern tooling.

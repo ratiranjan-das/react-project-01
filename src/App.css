@@ -123,6 +123,23 @@
   color: var(--text-h);
 }
 
+.cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 300;
+  margin-left: 2px;
+  line-height: 1;
+}
+
+.cursor--blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 .hero-tagline {
   font-size: 18px;
   line-height: 1.65;
