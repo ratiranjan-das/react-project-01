@@ -9,7 +9,7 @@ const contact = {
   linkedin:     { href: 'https://www.linkedin.com/in/ratiranjan-das-4b14041ab/', label: 'LinkedIn',  sub: 'Ratiranjan Das' },
   whatsapp:     { href: 'https://wa.me/916370295447',                 label: 'WhatsApp',  sub: '+91 63702 95447' },
   email:        { href: 'mailto:dasratiranjan65@gmail.com',           label: 'Email',     sub: 'dasratiranjan65@gmail.com' },
-  resume:       { href: '/Das_Resume_updated.pdf' },
+  resume:       { href: '/Resume.pdf' },
 }
 
 const skills = [
