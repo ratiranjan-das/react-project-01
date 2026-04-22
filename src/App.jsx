@@ -13,12 +13,12 @@ const contact = {
 }
 
 const skills = [
-  { name: 'React',        logo: `${SI}/react/61DAFB` },
-  { name: 'Next.js',      logo: `${SI}/nextdotjs/000000` },
-  { name: 'TypeScript',   logo: `${SI}/typescript/3178C6` },
-  { name: 'JavaScript',   logo: `${SI}/javascript/F7DF1E` },
   { name: 'HTML',         logo: `${SI}/html5/E34F26` },
   { name: 'CSS',          logo: `${SI}/css/1572B6` },
+  { name: 'JavaScript',   logo: `${SI}/javascript/F7DF1E` },
+  { name: 'React',        logo: `${SI}/react/61DAFB` },
+  { name: 'TypeScript',   logo: `${SI}/typescript/3178C6` },
+  { name: 'Next.js',      logo: `${SI}/nextdotjs/000000` },
   { name: 'Redux',        logo: `${SI}/redux/764ABC` },
   { name: 'RTK Query',    logo: `${SI}/redux/764ABC` },
   { name: 'Figma',        logo: `${SI}/figma/F24E1E` },
