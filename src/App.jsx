@@ -37,52 +37,36 @@ const UNSPLASH = 'https://images.unsplash.com'
 
 const projects = [
   {
-    title: 'Portfolio Site',
-    category: 'Personal Project',
-    desc: 'A personal portfolio built with React & Vite showcasing projects, skills and contact info with dark/light mode support.',
-    tags: ['React', 'Vite', 'CSS'],
-    preview: `${UNSPLASH}/photo-1507238691740-187a5b1d37b8?w=600&q=80`,
+    title: 'Revind.AI — Manufacturing ERP',
+    category: 'ERP Platform',
+    desc: 'A manufacturing ERP platform with Work Order management, dynamic group-by toggles, multi-field filtering, and production dashboards. Built reusable UI components from Figma designs within a Mono Repo architecture.',
+    tags: ['Next.js', 'TypeScript', 'ReactJS', 'Figma', 'JIRA'],
+    preview: 'https://api.microlink.io/?url=https://revind.ai&screenshot=true&embed=screenshot.url',
     comingSoon: false,
   },
   {
-    title: 'UI Component Library',
-    category: 'Open Source',
-    desc: 'A reusable collection of accessible React components with zero dependencies, built for scalability and design consistency.',
-    tags: ['React', 'TypeScript', 'Storybook'],
-    preview: `${UNSPLASH}/photo-1555066931-4365d14bab8c?w=600&q=80`,
+    title: 'RIOO — Property Management System',
+    category: 'Enterprise Web App',
+    desc: 'A real-estate management platform to manage properties, tenants, and leasing operations. Integrated Oracle NetSuite APIs for real-time data sync and implemented role-based UI access with reusable table and filtering components handling 500+ records.',
+    tags: ['ReactJS', 'Redux', 'JavaScript', 'Oracle NetSuite', 'REST APIs'],
+    preview: 'https://api.microlink.io/?url=https://riooapp.com&screenshot=true&embed=screenshot.url',
     comingSoon: false,
   },
   {
-    title: 'Grid UI',
-    category: 'Frontend Tool',
-    desc: 'A responsive grid layout system with drag-to-resize panels and customizable widget components for dashboard use cases.',
-    tags: ['React', 'CSS Grid', 'TypeScript'],
-    preview: `${UNSPLASH}/photo-1551288049-bebda4e38f71?w=600&q=80`,
+    title: 'KENZO — Employee Management Portal',
+    category: 'Internal Enterprise Portal',
+    desc: 'A secure internal portal supporting daily operations for 70+ employees — Check-In/Out, Attendance, Leave management, Sprint Planner, Task tracking, and role-based HR & Admin dashboards with real-time visibility.',
+    tags: ['ReactJS', 'Redux', 'JavaScript', 'HTML', 'CSS', 'REST APIs'],
+    preview: `${UNSPLASH}/photo-1542744173-8e7e53415bb0?w=600&q=80`,
     comingSoon: false,
   },
   {
-    title: 'LeetCode Clone',
-    category: 'AI-Powered Platform',
-    desc: 'A LeetCode-inspired platform with a special AI-powered hints feature and real-time code execution environment.',
-    tags: ['Next.js', 'TypeScript', 'Claude AI'],
-    preview: `${UNSPLASH}/photo-1515879218367-8466d910aaa4?w=600&q=80`,
-    comingSoon: true,
-  },
-  {
-    title: 'V0 Clone',
-    category: 'AI UI Generator',
-    desc: 'An AI-driven UI component generator that turns natural language prompts into production-ready React components instantly.',
-    tags: ['React', 'Claude AI', 'Tailwind'],
-    preview: `${UNSPLASH}/photo-1677442135703-1787eea5ce01?w=600&q=80`,
-    comingSoon: true,
-  },
-  {
-    title: 'Kanban View',
-    category: 'Productivity Tool',
-    desc: 'A drag-and-drop Kanban board for task management with real-time collaboration support and customizable workflows.',
-    tags: ['React', 'Redux', 'RTK Query'],
-    preview: `${UNSPLASH}/photo-1611224923853-80b023f02d71?w=600&q=80`,
-    comingSoon: true,
+    title: 'UNYGC — Unykloud Global Components',
+    category: 'Internal UI Component Library',
+    desc: 'An in-house ReactJS component library centralizing reusable UI across the organization — Drawer, Modal, Tables, Forms, Grid, Kanban View, Matrix, and app-specific modules. Adopted across KENZO and RIOO to reduce duplication and standardize UI behavior.',
+    tags: ['ReactJS', 'JavaScript', 'SCSS', 'HTML5', 'CSS3'],
+    preview: 'https://api.microlink.io/?url=https://daisyui.com/components/&screenshot=true&embed=screenshot.url',
+    comingSoon: false,
   },
 ]
 
@@ -92,26 +76,10 @@ export default function App() {
   const [dark, setDark] = useState(
     () => window.matchMedia('(prefers-color-scheme: dark)').matches
   )
-  const [displayName, setDisplayName] = useState('')
-  const [typing, setTyping] = useState(true)
-  const [done, setDone] = useState(false)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
-
-  useEffect(() => {
-    if (done) return
-    if (displayName.length < FULL_NAME.length) {
-      const t = setTimeout(() => {
-        setDisplayName(FULL_NAME.slice(0, displayName.length + 1))
-      }, 150)
-      return () => clearTimeout(t)
-    } else {
-      setTyping(false)
-      setDone(true)
-    }
-  }, [displayName, done])
 
   return (
     <>
@@ -152,10 +120,7 @@ export default function App() {
         <section className="hero-section" id="about">
           <div className="hero-text">
             <p className="hero-eyebrow">Hey there, I'm</p>
-            <h1 className="hero-name">
-              {displayName}
-              {!done && <span className="cursor">|</span>}
-            </h1>
+            <h1 className="hero-name">{FULL_NAME}</h1>
             <p className="hero-tagline">
               Frontend Developer crafting fast, beautiful web experiences with
               React &amp; modern tooling.
