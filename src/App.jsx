@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import profileImg from './assets/profile.png'
 import './App.css'
 
@@ -19,13 +20,13 @@ const skills = [
   { name: 'React',        logo: `${SI}/react/61DAFB` },
   { name: 'TypeScript',   logo: `${SI}/typescript/3178C6` },
   { name: 'Next.js',      logo: `${SI}/nextdotjs/000000` },
-  { name: 'Redux',        logo: `${SI}/redux/764ABC` },
-  { name: 'RTK Query',    logo: `${SI}/redux/764ABC` },
+  { name: 'Redux Toolkit', logo: `${SI}/redux/764ABC` },
+  { name: 'TanStack Query', logo: `${SI}/reactquery/FF4154` },
   { name: 'Figma',        logo: `${SI}/figma/F24E1E` },
   { name: 'Git CLI',      logo: `${SI}/git/F05032` },
   { name: 'GitHub',       logo: `${SI}/github/181717` },
   { name: 'Bitbucket',    logo: `${SI}/bitbucket/0052CC` },
-  { name: 'JIRA',         logo: `${SI}/jira/0052CC` },
+  { name: 'Zustand',       emoji: '🐻' },
   { name: 'Ant Design',   logo: `${SI}/antdesign/0170FE` },
   { name: 'Material UI',  logo: `${SI}/mui/007FFF` },
   { name: 'Tailwind',     logo: `${SI}/tailwindcss/06B6D4` },
@@ -92,6 +93,7 @@ export default function App() {
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
+            <Link to="/tracker" className="navbar-tracker-btn">☕ Tracker</Link>
           </nav>
           <button
             className="theme-toggle"
@@ -167,7 +169,10 @@ export default function App() {
           <div className="skills-grid">
             {skills.map((s) => (
               <div key={s.name} className="skill-card">
-                <img src={s.logo} alt={s.name} className="skill-icon" />
+                {s.emoji
+                  ? <span className="skill-emoji">{s.emoji}</span>
+                  : <img src={s.logo} alt={s.name} className="skill-icon" />
+                }
                 <span>{s.name}</span>
               </div>
             ))}

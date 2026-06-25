@@ -74,6 +74,21 @@
     }
   }
 
+  .navbar-tracker-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--accent);
+    color: var(--accent) !important;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.18s, color 0.18s;
+
+    &:hover {
+      background: var(--accent);
+      color: #fff !important;
+    }
+  }
+
   @media (max-width: 640px) {
     gap: 16px;
 
@@ -405,6 +420,16 @@
 .skill-icon {
   width: 36px;
   height: 36px;
+}
+
+.skill-emoji {
+  font-size: 32px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* ─── Projects / Timeline ────────────────────────────── */
